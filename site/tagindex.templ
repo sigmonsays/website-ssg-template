@@ -1,0 +1,23 @@
+package site
+
+
+templ TagIndex(site Site, title string) {
+  <!doctype html>
+  <html>
+    @head("tags")
+    <body>
+      <div class="container">
+        @Header(title)
+        <main class="article">
+        <h1>{title}</h1>
+        tags are sorted alphabetically<br/>
+
+        for _, tagset := range site.GetTags() {
+          <li><a href={"/tag/" + tagset.Tag + ".html"}>{tagset.Tag}</a> ({len(tagset.Pages)})</li>
+        }
+        </main>
+        @Footer()
+      </div>
+    </body>
+  </html>
+}

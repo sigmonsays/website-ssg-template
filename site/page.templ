@@ -1,0 +1,42 @@
+package site
+
+
+templ PageTop(site Site, page PageMetadata) {
+  <div class="grid-container">
+  @Slug(site, page)
+  <div class="grid-box" style="text-align: right;">
+  if page.FrontMatter.Date != "" {
+    Posted on {page.FrontMatter.Date} &nbsp; <br/>
+  }
+  @PageTags(site, page)
+  </div>
+  </div>
+  <p/>
+}
+
+templ PageTags(site Site, page PageMetadata) {
+  if len(page.FrontMatter.Tags) > 0 {
+    tagged
+    for _, tag := range page.FrontMatter.Tags {
+      <a href={"/tag/" + tag + ".html"}>{tag}</a> &nbsp;
+    }
+  }
+}
+
+templ Page(site Site, page PageMetadata, title string, body string) {
+  <!doctype html>
+  <html>
+    @head(title)
+    <body>
+      <div class="container">
+        @Header(title)
+        <main class="article">
+        @PageTop(site, page)
+        <h1>{title}</h1>
+        @templ.Raw(body)
+        </main>
+        @Footer()
+      </div>
+    </body>
+  </html>
+}

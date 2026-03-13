@@ -1,0 +1,36 @@
+package site
+
+//import "html/template"
+
+templ Archive(site Site, title string) {
+  <!doctype html>
+  <html>
+    @head("archive")
+    <body>
+      <div class="container">
+        @Header(title)
+        <main class="article">
+        <h1>{title}</h1>
+        for _, page := range site.GetPages(0) {
+
+          {{
+            if page.FrontMatter.SkipIndex {
+               continue
+            }
+          }}
+
+          <li><a href={ page.Url }>{page.Title}</a>
+          if page.FrontMatter.Date != "" {
+            &middot; {page.FrontMatter.Date}
+          }
+          if page.FrontMatter.Summary != "" {
+            &middot; <span>{page.FrontMatter.Summary}</span>
+          }
+          </li>
+        }
+        </main>
+        @Footer()
+      </div>
+    </body>
+  </html>
+}

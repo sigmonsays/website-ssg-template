@@ -1,0 +1,30 @@
+package site
+
+templ Directory(site Site, page PageMetadata, title string, body string, directory string, files []FileData) {
+  <!doctype html>
+  <html>
+    @head(title)
+    <body>
+      <div class="container">
+        @Header(title)
+        <main class="article">
+        @PageTop(site, page)
+        @templ.Raw(body)
+        for _, file := range files {
+          <li><a href={ "#" + file.Name}>{file.Name}</a></li>
+        }
+        <br>
+
+        for _, file := range files {
+          <h1 id={file.Name}>{ file.Name }</h1>
+          <a href="#top">top</a>
+          <pre><code>
+          @templ.Raw(file.Content)
+          </code></pre>
+        }
+        </main>
+        @Footer()
+      </div>
+    </body>
+  </html>
+}

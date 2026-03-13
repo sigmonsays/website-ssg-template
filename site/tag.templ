@@ -1,0 +1,21 @@
+package site
+
+
+templ PagesWithTag(site Site, pages []PageMetadata, tag string) {
+  <!doctype html>
+  <html>
+    @head("pages with tag " + tag)
+    <body>
+      <div class="container">
+        @Header("pages tagged " + tag)
+        <main class="article">
+        <h1>Pages with tag {tag}</h1>
+        for _, page := range pages {
+          <li><a href={page.Url}>{page.FrontMatter.Title}</a></li>
+        }
+        </main>
+        @Footer()
+      </div>
+    </body>
+  </html>
+}

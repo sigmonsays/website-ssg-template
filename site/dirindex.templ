@@ -1,0 +1,28 @@
+package site
+
+
+templ DirectoryIndex(site Site, title string, pages []PageMetadata) {
+  <!doctype html>
+  <html>
+    @head("archive")
+    <body>
+      <div class="container">
+        @Header(title)
+        <main class="article">
+        <h1>{title}</h1>
+        for _, page := range pages {
+          <li><a href={ page.Url }>{page.Title}</a>
+          if page.FrontMatter.Date != "" {
+            &middot; {page.FrontMatter.Date}
+          }
+          if page.FrontMatter.Summary != "" {
+            &middot; <span>{page.FrontMatter.Summary}</span>
+          }
+          </li>
+        }
+        </main>
+        @Footer()
+      </div>
+    </body>
+  </html>
+}

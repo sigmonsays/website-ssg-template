@@ -1,0 +1,11 @@
+package site
+
+templ Slug(site Site, page PageMetadata) {
+  <div class="grid-box">
+    &raquo; <a href="/">_YOUR_SITE_NAME_</a>
+
+    for _, slug := range page.GetSlug() {
+        / <a href={ slug.Url }>{ slug.Label }</a> &nbsp;
+    }
+  </div>
+}
