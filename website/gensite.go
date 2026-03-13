@@ -137,11 +137,12 @@ func genSite(opts *Options) error {
 			log.Printf("Error: generating dir index %s: %s", directory, err)
 		}
 
-		// generate a tag index page, ie tags.html
-		err = siteRender.WriteTagsIndex(ctx, "tags")
-		if err != nil {
-			return err
-		}
+	}
+
+	// generate a tag index page, ie tags.html
+	err = siteRender.WriteTagsIndex(ctx, "tags")
+	if err != nil {
+		return err
 	}
 
 	log.Printf("finished generating site")
