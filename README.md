@@ -9,7 +9,11 @@
 
 # setup
 
+Note the following commands have been put into a makefile, this is just to show
+how the parts come together.
+
 ```bash
+  # Install tools
   go install github.com/a-h/templ/cmd/templ@latest
 
   # render tmpl files into go code
